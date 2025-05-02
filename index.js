@@ -100,7 +100,7 @@ function drawTexture(rendering_canvas, rendering_ctx, brightness) {
   image.addEventListener("load", () => {
     rendering_ctx.drawImage(image, 0, 0);
 
-    var image_data = ctx.getImageData(0, 0, rendering_canvas[0].width, rendering_canvas[0].height);
+    var image_data = rendering_ctx.getImageData(0, 0, rendering_canvas[0].width, rendering_canvas[0].height);
 
     var display_canvas = $('#display-canvas');
     var display_canvas_context = display_canvas[0].getContext('2d');
