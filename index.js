@@ -163,7 +163,7 @@ $('#subtitle-brightness').on('input', () => {
 
 $('#download').on('click', () => {
   var link = document.createElement("a");
-  var display_canvas = $('#display_canvas');
+  var display_canvas = $('#display-canvas');
   link.href = display_canvas[0].toDataURL("image/png");
   link.download = "GQuuuuuuX-subtitle.png";
   link.click();
