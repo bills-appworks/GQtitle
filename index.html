@@ -34,14 +34,46 @@
           <input id="subtitle-brightness-number" type="number" min="0" max="100" value="100" />
         </div>
       </div>
+      <div>
+        <button id="download">画像ダウンロード</button>
+      </div>
       <div id="rendering">
         <canvas id="rendering-canvas" />
       </div>
-      <div id="rendering2">
-        <canvas id="rendering2-canvas" />
+      <div id="display">
+        <canvas id="display-canvas" />
+      </div>
+      <div>
+        <div class="repllay-url-header">
+          <div class="description">
+            <span>再現URL</span>
+          </div>
+          <button id="copy-replay-url">
+            <span>コピー</span>
+          </button>
+          <div id="copied-balloon" class="copied-balloon">
+            <span>コピーしました</span>
+          </div>
+        </div>
+        <textarea id="replay-url" readonly></textarea>
       </div>
     </main>
     <footer>
+      <small id="author">
+        <span>
+          <span>アプリ作成者：びるず</span>
+          <span class="link">(<a href="https://bsky.app/profile/bills-appworks.blue" target="_blank">Bluesky <i class="fa-brands fa-bluesky"></i> @bills-appworks.blue</a>)</span>
+        </span>
+      </small>
+      <small id="copyright">
+        <div>Application's copyright &copy; 2025 bills-appworks</div>
+        <div>(Except &ldquo;GQuuuuuuX&rdquo; and those product expression)</div>
+      </small>
+      <small id="privacy_policy">
+        <div>
+          <span class="link"><a href="./privacy_policy.html" target="_blank">プライバシーポリシー</a></span>
+        </div>
+      </small>
     </footer>
   </body>
 </html>

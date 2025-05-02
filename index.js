@@ -95,17 +95,18 @@ function drawBackground(canvas, ctx) {
   ctx.fill();
 }
 
-function drawTexture(canvas, ctx) {
+function drawTexture(rendering_canvas, rendering_ctx, brightness) {
   var image = new Image();
   image.addEventListener("load", () => {
-    ctx.drawImage(image, 0, 0);
+    rendering_ctx.drawImage(image, 0, 0);
 
-    var image_data = ctx.getImageData(0, 0, canvas[0].width, canvas[0].height);
+    var image_data = ctx.getImageData(0, 0, rendering_canvas[0].width, rendering_canvas[0].height);
 
-    var rendering2_canvas = $('#rendering2-canvas');
-    var rendering2_canvas_context = rendering2_canvas[0].getContext('2d');
-    adjustCanvas(rendering2_canvas, rendering2_canvas_context, canvas[0].width, canvas[0].height);
-    rendering2_canvas_context.putImageData(image_data, 0, 0); 
+    var display_canvas = $('#display-canvas');
+    var display_canvas_context = display_canvas[0].getContext('2d');
+    adjustCanvas(display_canvas, display_canvas_context, display_canvas[0].width, display_canvas[0].height);
+    display_canvas_context.globalAlpha = brightness / 100;
+    display_canvas_context.putImageData(image_data, 0, 0);
   });
   image.src = './texture.png';
 }
@@ -129,7 +130,7 @@ function rendering(canvas, ctx) {
   setLetterSpacing(ctx, spacing);
 
   drawText(ctx, values.text_base_x, values.text_base_y, text);
-  drawTexture(canvas, ctx);
+  drawTexture(canvas, ctx, brightness);
 
 //  ctx.fillStyle = 'rgb(0 0 0 / 90%)';
 //  ctx.beginPath();
