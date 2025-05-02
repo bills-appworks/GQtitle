@@ -1,0 +1,63 @@
+html, body {
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+#title {
+  font-family: sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  color: palegreen;
+  font-size: 12pt;
+}
+
+.description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.properties {
+  margin-left: auto;
+  margin-right: auto;
+  width: 20em;
+  display: inline-block;
+  margin: 0.5em 0 0.5em 0;
+  box-shadow: 0 0 0  1px rgba(255, 255, 255, 0.7),
+              0 0 0  3px #444444,
+              0 0 0  4px rgba(255, 255, 255, 0.7);
+}
+
+.property-item {
+  display: flex;
+  flex-direction: row;
+}
+
+.property-item > * {
+  margin: 0.2em;
+}
+
+.property-label {
+  box-sizing: border-box;
+  width: 6em;
+}
+
+.property-item > input[type="range"] {
+  box-sizing: border-box;
+  width: 8em;
+}
+
+.property-item > input[type="number"] {
+  box-sizing: border-box;
+  width: 7em;
+}
+
+#rendering-canvas {
+  width: 1024px;
+  height: 800px;
+}

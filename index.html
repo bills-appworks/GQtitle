@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GQuuuuuuXサブタイトル風画像ジェネレータ</title>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./index.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1 id="title">GQuuuuuuXサブタイトル風画像ジェネレータ</h1>
+    </header>
+    <main>
+      <div class="properties">
+        <div class="property-item">
+          <label for="subtitle-text" class="description property-label">サブタイトル</label>
+          <input id="subtitle-text" type="text" size="24" value="予告" />
+        </div>
+        <div class="property-item">
+          <label for="subtitle-size" class="description property-label">サイズ</label>
+          <input id="subtitle-size" type="range" min="1" max="256" value="128" />
+          <input id="subtitle-size-number" type="number" min="1" max="256" value="128" />
+        </div>
+        <div class="property-item">
+          <label for="subtitle-spacing" class="description property-label">文字間隔</label>
+          <input id="subtitle-spacing" type="range" min="-10" max="10" value="-1" />
+          <input id="subtitle-spacing-number" type="number" min="-10" max="10" value="-1" />
+        </div>
+        <div class="property-item">
+          <label for="subtitle-brightness" class="description property-label">輝度</label>
+          <input id="subtitle-brightness" type="range" min="0" max="100" value="100" />
+          <input id="subtitle-brightness-number" type="number" min="0" max="100" value="100" />
+        </div>
+      </div>
+      <div id="rendering">
+        <canvas id="rendering-canvas" />
+      </div>
+      <div id="rendering2">
+        <canvas id="rendering2-canvas" />
+      </div>
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>
