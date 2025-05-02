@@ -106,7 +106,7 @@ function drawTexture(rendering_canvas, rendering_ctx, brightness) {
     var display_canvas_context = display_canvas[0].getContext('2d');
     adjustCanvas(display_canvas, display_canvas_context, rendering_canvas[0].width, rendering_canvas[0].height);
     display_canvas_context.globalAlpha = brightness / 100;
-    display_canvas_context.fillStyle = display_canvas_context.createPattern(image, 'no-repeat');
+    display_canvas_context.fillStyle = display_canvas_context.createPattern(rendering_canvas[0], 'no-repeat');
     display_canvas_context.beginPath();
     display_canvas_context.rect(0, 0, display_canvas[0].width, display_canvas[0].height);
     display_canvas_context.fill();
