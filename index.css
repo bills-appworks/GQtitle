@@ -1,4 +1,11 @@
-html, body {
+/*
+ * GQuuuuuuXサブタイトル風画像ジェネレータ
+ * Copyright (c) 2025 bills-appworks
+ * This software is released under the MIT License.
+ * http://opensource.org/licenses/mit-license.php
+ */
+
+ html, body {
   margin: 0;
 }
 
@@ -6,13 +13,15 @@ body {
   width: 100%;
   color: #FFFFFF;
   background-color: #000000;
+  font-family: sans-serif;
 }
 
-header, footer {
+header, footer, main {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
   text-align: center;
+  color: lightseagreen;
 }
 
 #title {
@@ -20,7 +29,13 @@ header, footer {
   font-weight: 900;
   font-style: italic;
   color: palegreen;
-  font-size: 12pt;
+  font-size: 10pt;
+}
+
+input, textarea {
+  background-color: black;
+  color: white;
+  border: 1px solid lightseagreen;
 }
 
 .description {
@@ -32,21 +47,21 @@ header, footer {
 .properties {
   margin-left: auto;
   margin-right: auto;
-  width: 20em;
+  width: 22em;
   display: inline-block;
   margin: 0.5em 0 0.5em 0;
-  box-shadow: 0 0 0  1px rgba(255, 255, 255, 0.7),
-              0 0 0  3px #444444,
-              0 0 0  4px rgba(255, 255, 255, 0.7);
+  border: 2px solid lightseagreen;
 }
 
 .property-item {
   display: flex;
   flex-direction: row;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .property-item > * {
-  margin: 0.2em;
+  margin: 0.5em;
 }
 
 .property-label {
@@ -56,7 +71,7 @@ header, footer {
 
 .property-item > input[type="range"] {
   box-sizing: border-box;
-  width: 8em;
+  width: 9em;
 }
 
 .property-item > input[type="number"] {
@@ -64,7 +79,98 @@ header, footer {
   width: 7em;
 }
 
+#download {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 12em;
+  text-align: center;
+}
+
+#download > button {
+  padding: 1em;
+}
+
 #rendering-canvas {
   width: 1024px;
   height: 800px;
+  display: none;
+}
+
+#replay-url-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 100%;
+}
+
+#replay-url-header > * {
+  margin: 0.5em;
+}
+
+#copy-replay-url {
+  font-size: small;
+}
+
+#replay-url {
+  width: 100%;
+  height: 5em;
+}
+
+.copied-balloon {
+  padding: 0 0.5em 0 0.5em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: small;
+  color: #000000;
+  background-color: palegreen;
+  visibility: hidden;
+  transition: opacity 0.5s;
+  transition-delay: 1s;
+  opacity: 1;
+  /* for callout */
+  position: relative;
+}
+
+.copied-balloon-fadeout {
+  opacity: 0;
+  visibility: visible;
+}
+
+.copied-balloon::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: -0.4em;
+  padding: 0.35em;
+  background:inherit;
+  border-top: 0;
+  border-right: 0;
+  transform: rotate(45deg);
+}
+
+.link {
+  background-color: #888888;
+}
+
+@media (min-width: 768px) {
+  #title {
+    font-size: 16pt;
+  }
+
+  footer {
+    font-size: 16pt;
+  }
+}
+
+@media (min-width: 960px) {
+  #title {
+    font-size: 20pt;
+  }
+
+  footer {
+    font-size: 16pt;
+  }
 }

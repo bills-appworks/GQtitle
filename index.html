@@ -4,9 +4,44 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GQuuuuuuXサブタイトル風画像ジェネレータ</title>
+    <!--
+      Copyright (c) 2025 bills-appworks
+      This software is released under the MIT License.
+      http://opensource.org/licenses/mit-license.php
+    -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css" integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/brands.min.css" integrity="sha512-58P9Hy7II0YeXLv+iFiLCv1rtLW47xmiRpC1oFafeKNShp8V5bKV/ciVtYqbk2YfxXQMt58DjNfkXFOn62xE+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/solid.min.css" integrity="sha512-DzC7h7+bDlpXPDQsX/0fShhf1dLxXlHuhPBkBo/5wJWRoTU6YL7moeiNoej6q3wh5ti78C57Tu1JwTNlcgHSjg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./index.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="./index.js" defer></script>
+    <meta name="description" content="GQuuuuuuXのサブタイトル風の画像を生成するアプリです" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="GQuuuuuuXサブタイトル風画像ジェネレータ" />
+    <meta property="og:url" content="https://bills-appworks.github.io/GQuuuuuuX/" />
+    <meta property="og:description" content="GQuuuuuuXのサブタイトル風の画像を生成するアプリです" />
+    <meta property="og:site_name" content="GQuuuuuuXサブタイトル風画像ジェネレータ" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="872" />
+    <meta property="og:image:height" content="363" />
+    <meta property="og:image" content="https://bills-appworks.github.io/GQuuuuuuX/opengraph-image.png" />
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="./favicon.ico" type="image/x-icon" sizes="48x48" />
+    <link rel="icon" type="image/vnd.microsoft.icon" href="./favicon.ico" type="image/x-icon" sizes="48x48" />
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="./icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./icon-32x32.png">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7F7HKW0QFV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-7F7HKW0QFV');
+    </script>
   </head>
   <body>
     <header>
@@ -16,12 +51,12 @@
       <div class="properties">
         <div class="property-item">
           <label for="subtitle-text" class="description property-label">サブタイトル</label>
-          <input id="subtitle-text" type="text" size="24" value="予告" />
+          <input id="subtitle-text" type="text" size="27" value="予告" />
         </div>
         <div class="property-item">
           <label for="subtitle-size" class="description property-label">サイズ</label>
-          <input id="subtitle-size" type="range" min="1" max="256" value="128" />
-          <input id="subtitle-size-number" type="number" min="1" max="256" value="128" />
+          <input id="subtitle-size" type="range" min="1" max="256" value="64" />
+          <input id="subtitle-size-number" type="number" min="1" max="256" value="64" />
         </div>
         <div class="property-item">
           <label for="subtitle-spacing" class="description property-label">文字間隔</label>
@@ -30,12 +65,12 @@
         </div>
         <div class="property-item">
           <label for="subtitle-brightness" class="description property-label">輝度</label>
-          <input id="subtitle-brightness" type="range" min="0" max="100" value="100" />
-          <input id="subtitle-brightness-number" type="number" min="0" max="100" value="100" />
+          <input id="subtitle-brightness" type="range" min="0" max="100" value="90" />
+          <input id="subtitle-brightness-number" type="number" min="0" max="100" value="90" />
         </div>
       </div>
       <div>
-        <button id="download">画像ダウンロード</button>
+        <button id="download"><i class="fa-solid fa-download"></i> 画像ダウンロード</button>
       </div>
       <div id="rendering">
         <canvas id="rendering-canvas" />
@@ -44,7 +79,7 @@
         <canvas id="display-canvas" />
       </div>
       <div>
-        <div class="repllay-url-header">
+        <div id="replay-url-header">
           <div class="description">
             <span>再現URL</span>
           </div>
