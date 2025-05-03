@@ -26,7 +26,7 @@ header, footer, main {
 
 #title {
   font-family: sans-serif;
-  font-weight: 900;
+  font-weight: 600;
   font-style: italic;
   color: palegreen;
   font-size: 10pt;
@@ -73,6 +73,40 @@ input, textarea {
 .property-item > input[type="range"] {
   box-sizing: border-box;
   width: 9em;
+  appearance: none;
+  border: none;
+}
+
+.property-item > input[type="range"]::-webkit-slider-runnable-track {
+  background: lightseagreen;
+  height: 0.5rem;
+  border-radius: 0.25em;
+}
+
+.property-item > input[type="range"]::-moz-range-track {
+  background: lightseagreen;
+  height: 0.5rem;
+  border-radius: 0.25em;
+}
+
+.property-item > input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  background-color: palegreen;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: none;
+  border-radius: 50%;
+  transform: scale(2);
+}
+
+.property-item > input[type="range"]::-moz-range-thumb {
+  appearance: none;
+  background-color: palegreen;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: none;
+  border-radius: 50%;
+  transform: scale(2);
 }
 
 .property-item > input[type="number"] {
