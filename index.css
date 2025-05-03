@@ -19,7 +19,7 @@ body {
 header, footer, main {
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  width: 95%;
   text-align: center;
   color: lightseagreen;
 }
@@ -114,6 +114,7 @@ input, textarea {
 }
 
 #replay-url {
+  box-sizing: border-box;
   width: 100%;
   height: 5em;
 }
@@ -166,6 +167,10 @@ input, textarea {
 }
 
 @media (min-width: 960px) {
+  header, footer, main {
+    width: 80%;
+  }
+
   #title {
     font-size: 20pt;
   }
