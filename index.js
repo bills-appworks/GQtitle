@@ -106,11 +106,18 @@ function drawTextureAndDisplay(brightness) {
 
 function buildUrl() {
   var url = location.href.split('?')[0];
-  var params = {
-    "text": $('#subtitle-text').val(),
-    "size": $('#subtitle-size').val(),
-    "spacing": $('#subtitle-spacing').val(),
-    "brightness": $('#subtitle-brightness').val(),
+  var params = {};
+  if (query_parameter.text) {
+    params.text = query_parameter.text;
+  }
+  if (query_parameter.size) {
+    params.size = query_parameter.size;
+  }
+  if (query_parameter.spacing) {
+    params.spacing = query_parameter.spacing;
+  }
+  if (query_parameter.brightness) {
+    params.brightness = query_parameter.brightness;
   }
   var params_expand = new URLSearchParams(params).toString();
   if (query_parameter._specified) {
