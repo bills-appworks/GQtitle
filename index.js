@@ -192,7 +192,7 @@ function rendering(canvas, ctx) {
 function parseQueryParameter() {
   var param_object = {};
   var query_parameter = location.search;
-  if (query_parameter && query_parameter.length > 1) {
+  if (query_parameter && query_parameter.length > 0) {
     param_object["_specified"] = true;
     var url_search_params = new URLSearchParams(query_parameter);
     ["text", "size", "spacing", "brightness"].map((element) => {
