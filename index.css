@@ -51,6 +51,7 @@ input, textarea {
   display: inline-block;
   margin: 0.5em 0 0.5em 0;
   border: 2px solid lightseagreen;
+  touch-action: none;
 }
 
 .property-item {
