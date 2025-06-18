@@ -264,6 +264,18 @@ $('#download').on('click', () => {
   link.click();
 });
 
+$('#reset-button').on('click', () => {
+  $('#subtitle-text').val('予告');
+  $('#subtitle-size').val(64);
+  $('#subtitle-size-number').val(64);
+  $('#subtitle-spacing').val(-1);
+  $('#subtitle-spacing-number').val(-1);
+  $('#subtitle-brightness').val(90);
+  $('#subtitle-brightness-number').val(90);
+  query_parameter = {};
+  rendering(rendering_canvas, rendering_canvas_context);
+});
+
 $('#copy-replay-url').on('click', () => {
   navigator.clipboard.writeText($('#replay-url').val());
   $('#copied-balloon').addClass('copied-balloon-fadeout');

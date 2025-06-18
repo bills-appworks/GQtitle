@@ -114,6 +114,11 @@ input, textarea {
   width: 7em;
 }
 
+.functions > button {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
 #download {
   margin-top: 1em;
   margin-bottom: 1em;
