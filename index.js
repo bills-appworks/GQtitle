@@ -16,7 +16,13 @@ var display_canvas_context = display_canvas[0].getContext('2d');
 rendering_canvas_context.fillStyle = 'rgb(255, 255, 255)';
 rendering_canvas_context.strokeStyle = 'rgb(255, 255, 255)';
 
+var query_parameter = {};
+
 const adjust_characters = '$\/()|{}[]_';
+
+const texture_path = './texture.png';
+
+let texture_image;
 
 function drawAdjustText(ctx, x, y, text) {
   let offset_x = 0;
@@ -93,32 +99,28 @@ function drawBackground(canvas, ctx) {
 }
 
 function drawTextureAndDisplay(brightness) {
-  var image = new Image();
-  image.addEventListener("load", () => {
-    // 画像ロード完了後の処理（テクスチャ画像描画・キャンバス間反映）
+  // 画像ロード完了後の処理（テクスチャ画像描画・キャンバス間反映）
 
-    // レンダリング用キャンバスに描画（輝度パラメタ以外）してから表示用キャンバスに反映（輝度反映）
-    // CanvasRenderingContext2D.getImageData()/putImageData()による方法も考えられるが
-    // fill/stroke描画対象とimage描画対象を合わせて透過（輝度）表現するのにglobalAlpha/createPattern()による処理が適当であるため
-    // 良い副作用としてローカル実行時にgetImageData()では抵触するCORS制約が回避される
+  // レンダリング用キャンバスに描画（輝度パラメタ以外）してから表示用キャンバスに反映（輝度反映）
+  // CanvasRenderingContext2D.getImageData()/putImageData()による方法も考えられるが
+  // fill/stroke描画対象とimage描画対象を合わせて透過（輝度）表現するのにglobalAlpha/createPattern()による処理が適当であるため
+  // 良い副作用としてローカル実行時にgetImageData()では抵触するCORS制約が回避される
 
-    // テクスチャ画像をレンダリング用キャンバスに描画
-    rendering_canvas_context.drawImage(image, 0, 0);
+  // テクスチャ画像をレンダリング用キャンバスに描画
+  rendering_canvas_context.drawImage(texture_image, 0, 0);
 
-    // 表示用キャンバスのサイズをレンダリング用キャンバスに合わせる
-    adjustCanvas(display_canvas, display_canvas_context, rendering_canvas[0].width, rendering_canvas[0].height);
-    // 輝度パラメタを透過率として表現
-    // 文字描画時とテクスチャ画像描画時に輝度を処理する方法もあるが
-    // テクスチャ画像描画時だと白黒描画ピクセルも処理（黒抜けさせたいところも灰色化）してしまうため
-    // 文字とテクスチャをレンダリング用キャンバスで合成してから表示用キャンバス反映時に一括して処理
-    display_canvas_context.globalAlpha = brightness / 100;
-    display_canvas_context.fillStyle = display_canvas_context.createPattern(rendering_canvas[0], 'no-repeat');
-    display_canvas_context.beginPath();
-    display_canvas_context.rect(0, 0, display_canvas[0].width, display_canvas[0].height);
-    display_canvas_context.fill();
-    display_canvas_context.closePath();
-  });
-  image.src = './texture.png';
+  // 表示用キャンバスのサイズをレンダリング用キャンバスに合わせる
+  adjustCanvas(display_canvas, display_canvas_context, rendering_canvas[0].width, rendering_canvas[0].height);
+  // 輝度パラメタを透過率として表現
+  // 文字描画時とテクスチャ画像描画時に輝度を処理する方法もあるが
+  // テクスチャ画像描画時だと白黒描画ピクセルも処理（黒抜けさせたいところも灰色化）してしまうため
+  // 文字とテクスチャをレンダリング用キャンバスで合成してから表示用キャンバス反映時に一括して処理
+  display_canvas_context.globalAlpha = brightness / 100;
+  display_canvas_context.fillStyle = display_canvas_context.createPattern(rendering_canvas[0], 'no-repeat');
+  display_canvas_context.beginPath();
+  display_canvas_context.rect(0, 0, display_canvas[0].width, display_canvas[0].height);
+  display_canvas_context.fill();
+  display_canvas_context.closePath();
 }
 
 function buildUrl() {
@@ -284,25 +286,41 @@ $('#copy-replay-url').on('click', () => {
   }, 3000);
 });
 
+async function loadImage(image_path) {
+  const image = new Image();
+  return new Promise(
+    (resolve) => {
+      image.onload = () => {
+        resolve(image);
+      };
+      image.src = image_path;
+    }
+  );
+}
+
 /*
  * エントリポイント
  */
-// URLクエリパラメタ取得・反映
-var query_parameter = parseQueryParameter();
-if (query_parameter.text) {
-  $('#subtitle-text').val(decodeURIComponent(query_parameter.text.substring(0, 256)));
-}
-if (query_parameter.size) {
-  $('#subtitle-size').val(query_parameter.size);
-  $('#subtitle-size-number').val(query_parameter.size);
-}
-if (query_parameter.spacing) {
-  $('#subtitle-spacing').val(query_parameter.spacing);
-  $('#subtitle-spacing-number').val(query_parameter.spacing);
-}
-if (query_parameter.brightness) {
-  $('#subtitle-brightness').val(query_parameter.brightness);
-  $('#subtitle-brightness-number').val(query_parameter.brightness);
-}
-// 初回実行時レンダリング
-rendering(rendering_canvas, rendering_canvas_context);
+(async function() {
+  texture_image = await loadImage(texture_path);
+
+  // URLクエリパラメタ取得・反映
+  query_parameter = parseQueryParameter();
+  if (query_parameter.text) {
+    $('#subtitle-text').val(decodeURIComponent(query_parameter.text.substring(0, 256)));
+  }
+  if (query_parameter.size) {
+    $('#subtitle-size').val(query_parameter.size);
+    $('#subtitle-size-number').val(query_parameter.size);
+  }
+  if (query_parameter.spacing) {
+    $('#subtitle-spacing').val(query_parameter.spacing);
+    $('#subtitle-spacing-number').val(query_parameter.spacing);
+  }
+  if (query_parameter.brightness) {
+    $('#subtitle-brightness').val(query_parameter.brightness);
+    $('#subtitle-brightness-number').val(query_parameter.brightness);
+  }
+  // 初回実行時レンダリング
+  rendering(rendering_canvas, rendering_canvas_context);
+})();
