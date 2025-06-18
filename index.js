@@ -16,8 +16,25 @@ var display_canvas_context = display_canvas[0].getContext('2d');
 rendering_canvas_context.fillStyle = 'rgb(255, 255, 255)';
 rendering_canvas_context.strokeStyle = 'rgb(255, 255, 255)';
 
+const adjust_characters = '$\/()|{}[]_';
+
+function drawAdjustText(ctx, x, y, text) {
+  let offset_x = 0;
+  const text_metrics = ctx.measureText(adjust_characters); 
+  const adjust_offset_y = (text_metrics.actualBoundingBoxAscent + text_metrics.actualBoundingBoxDescent) / 100 * -5;
+  text.split('').forEach((character) => {
+    let offset_y = adjust_characters.includes(character) ? adjust_offset_y : 0;
+    ctx.fillText(character, x + offset_x, y + offset_y);
+    offset_x += ctx.measureText(character).width;
+  });
+}
+
 function drawText(ctx, x, y, text) {
-  ctx.fillText(text, x, y);
+  if (adjust_characters.split('').some((character) => text.includes(character))) {
+    drawAdjustText(ctx, x, y, text);
+  } else {
+    ctx.fillText(text, x, y);
+  }
 }
 
 function getValues(ctx, text, spacing) {
